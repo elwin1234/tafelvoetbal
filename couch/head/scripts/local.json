@@ -1,0 +1,14 @@
+[
+  {
+    "url": "/tafelvoetbal/_design/tafelvoetbal/js/custom/constants.js"
+  },
+  {
+    "url": "/tafelvoetbal/_design/tafelvoetbal/js/custom/debug_console.js"
+  },
+  {
+    "url": "/tafelvoetbal/_design/tafelvoetbal/js/custom/couchDBDataProvider.js"
+  },
+  {
+    "url": "/tafelvoetbal/_design/tafelvoetbal/js/custom/main.js"
+  }
+]

@@ -1,0 +1,57 @@
+@import "elements.less";
+
+.opacity (@amount) {
+  -khtml-opacity:@amount;
+  -moz-opacity:@amount;
+  -ms-filter:alpha(opacity=@amount);
+  filter:alpha(opacity=@amount);
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=@amount);
+  opacity:@amount;
+}
+.transition (@prop: all, @time: 1s, @ease: linear) {
+  -webkit-transition: @prop @time @ease;
+  -moz-transition: @prop @time @ease;
+  -o-transition: @prop @time @ease;
+  -ms-transition: @prop @time @ease;
+  transition: @prop @time @ease;
+}
+.transparent (@r: 255, @g: 255, @b: 255, @a: 0.8) {
+  /* rgb fall back, in case rgba is not supported */
+  background-color: rgb(@r, @g, @b);
+  background-color: rgba(@r, @g, @b, @a);
+}
+.background-size (@w: auto, @h: 100%) {
+  -webkit-background-size: @w @h;
+  -moz-background-size: @w @h;
+  -o-background-size: @w @h;
+  background-size: @w @h;
+}
+
+// Colors
+@base: #FFFF00;
+@main-color: #000;
+@background-color: #fff;
+@fulltext-color: @main-color;
+
+@lighter1: lighten(spin(@base, 15), 10%);
+@lighter2: lighten(spin(@base, 30), 30%);
+@darker1: darken(spin(@base, -15), 10%);
+@darker2: darken(spin(@base, -30), 30%);
+
+/* Implementation */
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
+  display: block;
+}
+
+/* every anchor can be a handje */
+a{
+  cursor: pointer;
+}
+
+html, body{
+  height: 100%;
+}
+
+.score{
+  font-size: 20em;
+}

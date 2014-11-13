@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tafelvoetbal</title>
+    {{#head.scripts.libraries}}
+      <script type="{{{type}}}" src="{{{url}}}"></script>
+    {{/head.scripts.libraries}}
+
+    {{#head.css.libraries}}
+      <link rel="stylesheet" type="text/css" href="{{{url}}}"></link>
+    {{/head.css.libraries}}
+
+    {{#head.css.local}}
+      <link rel="stylesheet" type="text/css" href="{{{url}}}"></link>
+    {{/head.css.local}}
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  </head>
+
+  <body>
+    <div class="score">
+      <span id="scoreA">0</span> - <span id="scoreB">0</span>
+    </div>
+  </body>
+
+  {{#head.scripts.local}}
+    <script type="{{{type}}}" src="{{{url}}}"></script>
+  {{/head.scripts.local}}
+</html>

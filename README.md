@@ -1,10 +1,10 @@
 tafelvoetbal
 ============
 
-Detect table football goals and collect statistics using a raspberry pi and sensors. 
+Detect table football goals and collect statistics using a raspberry pi and sensors.
 
 ### Current state
-First experimental setup for detecting goals and simple web interface to display the current score.
+First experimental setup to detect goals and display the current score on a web-interface.
 
 ### Hardware requirements
  - $35 [Raspberry Pi](http://www.raspberrypi.org) (I use model B, rev2)

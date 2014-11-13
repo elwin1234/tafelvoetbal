@@ -1,0 +1,30 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/* Implementation */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+/* every anchor can be a handje */
+a {
+  cursor: pointer;
+}
+html,
+body {
+  height: 100%;
+}
+.score {
+  font-size: 20em;
+}
