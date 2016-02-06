@@ -1,5 +1,7 @@
 {
   "_id": "scoreB",
   "type": "score",
-  "score": 0
+  "dev": "scoreB",
+  "score": 0,
+  "goal": 1
 }

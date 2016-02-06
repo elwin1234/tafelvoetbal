@@ -34,6 +34,7 @@ Rx.Observable.fromCouchDB = function (couchDB) {
     function setupChanges(since) {
       if (!changesRunning) {
         if (ENABLE_EVENTSOURCE && window.EventSource) {
+          console.debug('use eventsource');
             var source = new EventSource(
               "/"+DB+"/_changes?feed=eventsource&include_docs=true&since="+since);
 
@@ -48,6 +49,8 @@ Rx.Observable.fromCouchDB = function (couchDB) {
           changesRunning = true;
 
         } else {
+          console.debug('DO NOT use eventsource');
+
           changeHandler = couchDB.changes(since,{include_docs:true});
           changesRunning = true;
           changeHandler.onChange(function(data){
@@ -81,6 +84,7 @@ Rx.Observable.fromCouchDBView = function(couchDB,options){
       reduce:false,
       update_seq : true,
       success : function(data) {
+        console.debug('data',data);
         $.each(data.rows,function(index,couchIndex){
           myDoc = couchIndex.doc;
           observer.onNext(myDoc);

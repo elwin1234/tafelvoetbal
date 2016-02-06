@@ -1,0 +1,13 @@
+{
+    "options":{
+        "update_index_after_read":false,
+        "read_timeout": 30
+    },
+    "database":{
+        "name":"tafelvoetbal",
+        "host":"myhost.com",
+        "port":"5984",
+        "user":"userX",
+        "password":"passwordY"
+    }
+}

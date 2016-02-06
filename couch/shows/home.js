@@ -1,7 +1,7 @@
 function (doc,req){
   var Mustache = require('libs/mustache');
   var ddoc = this;
-  // var Syntax = require('libs/syntax');
+   var Syntax = require('libs/syntax');
   // var helpers = require('libs/helpers');
   // var body;
   var globalTemplate = ddoc.templates.global;

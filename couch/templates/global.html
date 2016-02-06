@@ -2,19 +2,11 @@
 <html>
   <head>
     <title>Tafelvoetbal</title>
-    {{#head.scripts.libraries}}
-      <script type="{{{type}}}" src="{{{url}}}"></script>
-    {{/head.scripts.libraries}}
 
-    {{#head.css.libraries}}
-      <link rel="stylesheet" type="text/css" href="{{{url}}}"></link>
-    {{/head.css.libraries}}
+    <link rel="stylesheet" href="/tafelvoetbal/_design/tafelvoetbal/rickshaw/rickshaw.min.css">
+    <link rel="stylesheet" href="/tafelvoetbal/_design/tafelvoetbal/css/main.css">
 
-    {{#head.css.local}}
-      <link rel="stylesheet" type="text/css" href="{{{url}}}"></link>
-    {{/head.css.local}}
-
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <!--<link rel="shortcut icon" href="img/favicon.ico">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   </head>
 
@@ -22,9 +14,24 @@
     <div class="score">
       <span id="scoreA">0</span> - <span id="scoreB">0</span>
     </div>
-  </body>
 
-  {{#head.scripts.local}}
-    <script type="{{{type}}}" src="{{{url}}}"></script>
-  {{/head.scripts.local}}
+    <div id="graph">GRAPH</div>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+    <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/js/libs/jquery.couch.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/js/libs/rx.all.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/rickshaw/vendor/d3.min.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/rickshaw/vendor/d3.layout.min.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/rickshaw/rickshaw.js"></script>
+
+    <script src="/tafelvoetbal/_design/tafelvoetbal/js/custom/constants.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/js/custom/debug_console.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/js/custom/couchDBDataProvider.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/js/custom/Tile.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/js/custom/graphTile.js"></script>
+    <script src="/tafelvoetbal/_design/tafelvoetbal/js/custom/main.js"></script>
+
+
+  </body>
 </html>
