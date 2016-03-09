@@ -10,7 +10,7 @@ SCORE_B = 'scoreB';
 
 $db = $.couch.db(DB);
 var now = new Date().getTime();
-console.debug('now',now);
+console.debug('now', now);
 var counterA = 0;
 var counterB = 0;
 
@@ -25,27 +25,26 @@ var goalStream = dbStream.filter(
 );
 
 var goalStreamA = goalStream.filter(
-    function(doc) {
+    function (doc) {
         var condition = doc.dev === SCORE_A && doc.time > now;
         if (condition) {
-            console.debug('goalStreamA',doc);
+            console.debug('goalStreamA', doc);
         }
         return condition;
     }
 );
 
 var goalStreamB = goalStream.filter(
-    function(doc) {
+    function (doc) {
         var condition = doc.dev === SCORE_B && doc.time > now;
         if (condition) {
-            console.debug('goalStreamB',doc);
+            //console.debug('goalStreamB',doc);
         }
         return condition;
     }
 );
 
 var ding = 0;
-var ding2 = 0;
 
 $(document).ready(function ($) {
     console.debug('Debug enabled');
@@ -65,20 +64,6 @@ $(document).ready(function ($) {
         }
     );
 
-    ding2 = goalStreamB.sum(function (x, idx, obs) {
-        return x.goal;
-    }).subscribe(
-        function (x) {
-            counterB = x;
-            $('#scoreB').html(x);
-        },
-        function (err) {
-            console.log('Error: ' + err);
-        },
-        function () {
-            console.log('Completed');
-        }
-    );
 
 });
 
@@ -118,19 +103,12 @@ var view = Rx.Observable.fromCouchDBView(
 );
 
 
-
-
 view.subscribe(function (doc) {
     //console.debug('goalie', doc);
 });
 
 
-var timer = Rx.Observable.timer(200, 1000)
-    .timeInterval()
-    .pluck('interval')
-
-
-var interval = Rx.Observable.interval(2000).map(function(){
+var interval = Rx.Observable.interval(5000).map(function () {
     return {
         time: Math.round(new Date().getTime())
     }
@@ -162,28 +140,82 @@ var aStream = Rx.Observable.combineLatest(
     interval
 );
 
-aMapper = aStream.map(function(all){
-    return{
-        x: ((Math.max(all[0][0].time, all[1].time))-now)/1000,
+aMapper = aStream.map(function (all) {
+    return {
+        x: ((Math.max(all[0][0].time, all[1].time)) - now) / 1000,
         y: all[0][1]
     }
+});
+
+
+var viewScoreB = Rx.Observable.fromCouchDBView(
+    $db,
+    $.extend(
+        {device: SCORE_B},
+        baseOptions60m
+    )
+);
+viewScoreB.subscribe(function (a, b, c) {
+    console.log('viewSCoreB');
+    console.log('a', a);
+    console.log('b', b);
+    console.log('c', c);
 })
 
-//)
-
-//var mergeB = Rx.Observable.merge(
-//    goalStreamB
-    //intervalB
-//);
-
-aStream.subscribe(function(d){
-   console.log('aStream',d);
+var testty = viewScoreB.concat(goalStreamB).sum(function(x, idx, obs) {
+    console.log("deX",x);
+    return x.goal || 0;
 });
 
-aMapper.subscribe(function(d){
-    console.log('aMapper',d);
+//testty.sum(function (x, idx, obs) {
+//    return x.goal;
+//}
+
+var doei = testty.map(function(all) {
+    console.debug('all', all);
+    return {
+        x: ((Math.max(all[0].time, all[1].time)) - now) / 1000,
+        y: all[0].score
+    }
 });
 
+testty.subscribe(function (a, b, c) {
+    console.log("johoo");
+    console.log('a', a);
+    $('#scoreB').html(a);
+    console.log('b', b);
+    console.log('c', c);
+});
+
+var bStream = Rx.Observable.combineLatest(
+    testty,
+    interval
+);
+
+bMapper = bStream.map(function (all) {
+    console.debug('all', all);
+    return {
+        x: all[1].time - now / 1000,
+        y: all[0]
+    }
+});
+
+
+aStream.subscribe(function (d) {
+    console.log('aStream', d);
+});
+
+aMapper.subscribe(function (d) {
+    console.log('aMapper', d);
+});
+
+bStream.subscribe(function (d) {
+    console.log('bStream', d);
+});
+
+bMapper.subscribe(function (d) {
+    console.log('bMapper', d);
+});
 
 
 //// Helper function to map values of db to values to graph.
@@ -220,32 +252,31 @@ aMapper.subscribe(function(d){
 
 
 console.log('graphOptions', graphOptions);
-var graph = new GraphTile('#graph',aMapper,{
-  range:range60minutes,
-  name: 'Score',
-  serie:{
-    name : 'Ok doei',
-    data : [],
-    color : '#c05020',
-    strokeWidth : 1,
-    renderer: 'line',
-    interpolation: 'step-after'
-  },
+var graph = new GraphTile('#graph', aMapper, {
+    range: range60minutes,
+    name: 'Score',
+    serie: {
+        name: 'scoreA',
+        data: [],
+        color: '#c05020',
+        strokeWidth: 1,
+        renderer: 'line',
+        interpolation: 'step-after'
+    },
     //preserve: true,
     //stack:false,
-  //offset: "zero",
-  graphOptions: graphOptions
+    //offset: "zero",
+    graphOptions: graphOptions
 });
 //
-//graph.addIndependentSerie(mergeB,{
-//     name : 'Gewenste Temperatuur',
-//     data : [],
-//     color : 'yellow',
-//     renderer: 'line'
-//});
-//
-//graph.vSetSmooth(0);
+graph.addIndependentSerie(bMapper, {
+    name: 'scoreB',
+    data: [],
+    color: 'yellow',
+    renderer: 'line'
+});
 
+//graph.vSetSmooth(0);
 
 
 graph.vRender();
