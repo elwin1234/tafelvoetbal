@@ -3,6 +3,8 @@ tafelvoetbal
 
 Detect table football goals and collect statistics using a raspberry pi and sensors.
 
+RTD Test
+
 ### Current state
 First experimental setup to detect goals and display the current score on a web-interface.
 
