@@ -1,9 +1,9 @@
 tafelvoetbal
 ============
 
-Detect table football goals and collect statistics using a raspberry pi and sensors.
+[![Documentation Status](https://readthedocs.org/projects/tafelvoetbal/badge/?version=latest)](http://tafelvoetbal.readthedocs.io/en/latest/?badge=latest)
 
-RTD Test
+Detect table football goals and collect statistics using a raspberry pi and sensors.
 
 ### Current state
 First experimental setup to detect goals and display the current score on a web-interface.
